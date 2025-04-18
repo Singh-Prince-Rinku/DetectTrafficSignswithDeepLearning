@@ -66,8 +66,8 @@ def evaluate_model(model_path, data_path=None, conf_thresh=0.25, iou_thresh=0.5,
     
     # Print results summary
     print("\nEvaluation Results:")
-    print(f"mAP@{iou_thresh:.2f}:      {results.box.map:.4f}")
-    print(f"mAP@0.5:0.95:    {results.box.map50_95:.4f}")
+    print(f"mAP@{iou_thresh:.2f}:      {results.box.map50:.4f}")
+    print(f"mAP@0.5:0.95:    {results.box.map:.4f}")
     print(f"Precision:       {results.box.p:.4f}")
     print(f"Recall:          {results.box.r:.4f}")
     print(f"F1-Score:        {results.box.f1:.4f}")
@@ -77,9 +77,9 @@ def evaluate_model(model_path, data_path=None, conf_thresh=0.25, iou_thresh=0.5,
     print("\nPer-class Results:")
     df = pd.DataFrame({
         'Class': [class_names.get(i, f"Class {i}") for i in range(len(results.names))],
-        'AP@0.5': results.box.ap50.tolist(),
-        'Precision': results.box.p_curve[:, 0, -1].tolist(), 
-        'Recall': results.box.r_curve[:, 0, -1].tolist()
+        'AP@0.5': results.box.ap50,
+        'Precision': results.box.p_curve[:, 0, -1] if hasattr(results.box, 'p_curve') else [0] * len(results.names), 
+        'Recall': results.box.r_curve[:, 0, -1] if hasattr(results.box, 'r_curve') else [0] * len(results.names)
     })
     
     # Sort by AP50 and print top and bottom 5 classes
