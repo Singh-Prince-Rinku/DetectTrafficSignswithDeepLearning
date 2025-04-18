@@ -1,0 +1,63 @@
+# Training configuration for traffic sign detection model
+
+# Dataset configuration
+dataset:
+  name: 'GTSRB'  # German Traffic Sign Recognition Benchmark
+  train_path: 'data/processed/train'
+  val_path: 'data/processed/val'
+  test_path: 'data/processed/test'
+  img_size: 640  # Input size for YOLOv8
+  batch_size: 16
+  num_workers: 4
+
+# Model configuration
+model:
+  type: 'yolov8'
+  size: 's'  # Use YOLOv8s (small version)
+  pretrained: true  # Use pre-trained weights
+  freeze_backbone: false  # Whether to freeze backbone during training
+
+# Training configuration
+training:
+  epochs: 100
+  patience: 15  # Early stopping patience
+  optimizer: 'Adam'
+  learning_rate: 0.001
+  weight_decay: 0.0005
+  momentum: 0.937
+  lr_scheduler: 'cosine'
+  warmup_epochs: 3
+
+# Augmentation configuration
+augmentation:
+  hsv_h: 0.015  # HSV-Hue augmentation
+  hsv_s: 0.7  # HSV-Saturation augmentation
+  hsv_v: 0.4  # HSV-Value augmentation
+  rotate: 0.0  # Image rotation (+/- deg)
+  translate: 0.1  # Image translation (+/- fraction)
+  scale: 0.5  # Image scale (+/- gain)
+  fliplr: 0.5  # Horizontal flip probability
+  flipud: 0.0  # Vertical flip probability
+  mosaic: 1.0  # Mosaic augmentation probability
+  mixup: 0.0  # Mixup augmentation probability
+
+# Hyperparameters for loss functions
+loss:
+  box: 0.05  # Box loss gain
+  cls: 0.5  # Class loss gain
+  obj: 1.0  # Object loss gain
+
+# Evaluation parameters
+evaluation:
+  iou_thres: 0.6  # IoU threshold for NMS
+  conf_thres: 0.25  # Confidence threshold for detection
+  max_det: 300  # Maximum number of detections per image
+  save_hybrid: false  # Save hybrid version of labels (labels + additional predictions)
+  save_conf: true  # Save confidences in --save-txt labels
+  save_json: true  # Save a COCO JSON results file
+
+# Save options
+save:
+  save_period: 10  # Save checkpoint every x epochs (disabled if < 1)
+  save_best: true  # Save best checkpoint
+  save_last: true  # Save last checkpoint 

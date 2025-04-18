@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environments
+venv/
+env/
+ENV/
+
+# Data
+data/raw/
+data/processed/
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.mp4
+*.avi
+*.mov
+*.webm
+!examples/*.jpg
+!examples/*.mp4
+
+# Model files
+*.pt
+*.pth
+*.onnx
+*.mlmodel
+models/*.pt
+
+# YOLOv8 runs
+runs/
+traffic_sign_detection/
+
+# Results
+results/
+evaluation/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
